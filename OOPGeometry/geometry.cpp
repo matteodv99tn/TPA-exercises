@@ -39,16 +39,16 @@ using namespace std;
 
     PointArray::PointArray(){
 
-        this->lenght = 0;
+        this->length = 0;
         this->points = NULL;
     }
 
     PointArray::PointArray(const Point points[], const unsigned int size){
 
-        this->lenght = size;
+        this->length = size;
         this->points = new Point[size];
 
-        for(unsigned int i = 0; i < this->lenght; i++) {
+        for(unsigned int i = 0; i < this->length; i++) {
             
             this->points[i] = points[i];
 
@@ -65,13 +65,13 @@ using namespace std;
 
             this->points = new Point[n];
 
-            for(unsigned int i = 0; i < min(n, this->lenght); i++) {
+            for(unsigned int i = 0; i < min(n, this->length); i++) {
 
                 this->points[i] = startingpoints[i];
 
             }
 
-            this->lenght = n;
+            this->length = n;
 
             delete startingpoints;
 
@@ -81,7 +81,26 @@ using namespace std;
 
     #pragma region // Public Methods
 
+        string PointArray::as_string(){
+            
+            string str = "[";
+            
+            for(unsigned int i = 0; i < this->length - 1; i++)
+                str += this->points[i].as_string() + ", ";
+
+            str += this->points[this->length - 1].as_string() + "]";
+            
+            return str;
+        }
         
+        void PointArray::push_back( Point &p ){
+
+            this->length++;
+            this->resize( this->length );
+
+            this->points[ this->length - 1] = p;
+
+        }
 
 
     #pragma endregion

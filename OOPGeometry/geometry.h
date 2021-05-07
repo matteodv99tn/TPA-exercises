@@ -31,7 +31,7 @@
         private:
 
             Point * points;
-            unsigned int lenght; 
+            unsigned int length; 
 
             void resize(const unsigned int n);
 
@@ -42,7 +42,7 @@
             PointArray(const Point points[], const unsigned int size);
 
             // Methods
-            std::string as_string(); // To be implemented
+            std::string as_string(); 
             void push_back(Point &p ); // To be implemented
             // To be continued ... 
 
