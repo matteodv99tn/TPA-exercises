@@ -7,7 +7,6 @@
     class BasicStack : public Stack{
 
         protected:
-
             string elements;
 
         public:
