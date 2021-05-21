@@ -17,6 +17,11 @@ using namespace std;
             this->y = val2;
         }
 
+        Point::Point(const Point &pt ){
+            this->x = pt.x;
+            this->y = pt.y;
+        }
+
     #pragma endregion
 
     string Point::as_string(){
@@ -55,6 +60,12 @@ using namespace std;
         }
 
     }
+
+    PointArray::PointArray(const PointArray &pv){
+        
+        this->resize( pv.length );
+
+    }
     #pragma endregion
 
     #pragma region // Private Methods
@@ -81,8 +92,10 @@ using namespace std;
 
     #pragma region // Public Methods
 
-        string PointArray::as_string(){
+        string PointArray::as_string() const{
             
+            if(this->length == 0 ) return "[]";
+
             string str = "[";
             
             for(unsigned int i = 0; i < this->length - 1; i++)
@@ -95,13 +108,49 @@ using namespace std;
         
         void PointArray::push_back( Point &p ){
 
-            this->length++;
-            this->resize( this->length );
-
+            this->resize( this->length + 1);
             this->points[ this->length - 1] = p;
 
         }
+        
+        void PointArray::insert(const unsigned int pos, Point &p){
 
+            if( pos > this->length ) throw invalid_argument( string("Trying to insert in a  index (" + to_string(pos) + ") greater than the dimension of the array (" + to_string(this->length) + ")!\n"));
+            if( pos < 0 ) throw invalid_argument("Trying to insert in a negative index! \n");
+
+            this->resize( this->length + 1 );
+
+            for(unsigned int i = this->length - 1; i > pos; i--)
+                this->points[i] = this->points[i-1];
+
+            this->points[pos] = p;
+
+        }
+
+        void PointArray::remove(const unsigned int pos){
+
+            if( pos >= this->length ) throw invalid_argument("Trying to remove index greater than the dimension of the array!\n");
+            if( pos < 0 ) throw invalid_argument("Trying to remove a negative index! \n");
+
+            for(unsigned int i = pos; i < this->length - 1; i++)
+                this->points[i] = this->points[i+1];
+
+            this->length--;
+            this->resize( this->length );
+
+        }
+
+        void PointArray::clear(){
+            
+            this->resize( 0 );
+
+        }
+
+        Point * PointArray::get(unsigned int position){
+
+            return &this->points[position];
+
+        }
 
     #pragma endregion
 

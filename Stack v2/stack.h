@@ -4,10 +4,16 @@
 
     #include <iostream>
     #include <vector>
+<<<<<<< HEAD
     #include <algorithm>
 
     using std::string;
     using std::vector;
+=======
+
+    using std::vector;
+    using std::string;
+>>>>>>> 0a7a747b2e2828e3c7c8534510e3434b7a9620d7
     
     template <typename T>
     class Stack {
